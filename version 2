@@ -1,0 +1,115 @@
+import random
+
+def iniciar_sesion():
+    while True:
+        nickname = input("Introduce tu nickname (o escribe 'salir' para salir): ")
+        
+        # Permitir al usuario salir
+        if nickname.lower() == "salir":
+            print("Has salido del sistema. ¡Hasta pronto!")
+            return None
+        
+        # Verificar si el nickname es válido
+        if nickname.strip() == "":
+            print("El nickname no puede estar vacío. Inténtalo de nuevo.")
+        else:
+            print(f"Bienvenido, {nickname}!")
+            return nickname
+
+def juego():
+    # Lista combinada de preguntas
+    preguntas = [
+        "¿Deporte en equipo de 11 jugadores?",
+        "¿Cuál es el deporte acuático que consta de 4 estilos?",
+        "¿Récord mundial 100 metros libre natación?",
+        "¿Cuál es el deporte más popular en el mundo?",
+        "¿Qué deporte se juega en una cancha de madera con un aro y una red?",
+        "¿Cuál es el deporte de combate más popular en el mundo?",
+        "¿Qué deporte se practica en una pista de hielo con patines?",
+        "¿Cuál es el deporte más popular en los Estados Unidos?",
+        "¿Qué deporte se juega con un balón y un objetivo es anotar goles?",
+        "¿Cuál es el deporte de raqueta más popular en el mundo?",
+        "¿Moto con el récord de velocidad?",
+        "¿Moto más vendida en Colombia?",
+        "¿Cuántos cambios tiene una NKD?",
+        "¿Cuál es el fabricante de automóviles más grande del mundo?",
+        "¿Qué tipo de vehículo es conocido por su velocidad y agilidad?",
+        "¿Cuál es el sistema de propulsión más común en los vehículos actuales?",
+        "¿Qué marca de vehículos es conocida por sus modelos de lujo y deportivos?",
+        "¿Cuál es el tipo de transmisión más común en los vehículos actuales?",
+        "¿Qué tecnología de seguridad es común en los vehículos modernos?",
+        "¿Cuál es el combustible más común utilizado en los vehículos?"
+    ]
+    
+    # Lista combinada de opciones para cada pregunta
+    opciones = [
+        ["a: fútbol", "b: baloncesto", "c: rugby", "d: voleibol"],
+        ["a: waterpolo", "b: natación", "c: remo", "d: esquí acuático"],
+        ["a: 44.84 segundos", "b: 45.00 segundos", "c: 43.50 segundos", "d: 46.10 segundos"],
+        ["a: Fútbol", "b: Baloncesto", "c: Béisbol", "d: Fútbol americano"],
+        ["a: Baloncesto", "b: Voleibol", "c: Tenis", "d: Bádminton"],
+        ["a: Boxeo", "b: Artes marciales mixtas", "c: Karate", "d: Taekwondo"],
+        ["a: Patinaje artístico", "b: Hockey sobre hielo", "c: Patinaje de velocidad", "d: Curling"],
+        ["a: Fútbol americano", "b: Béisbol", "c: Baloncesto", "d: Fútbol"],
+        ["a: Fútbol", "b: Baloncesto", "c: Béisbol", "d: Fútbol americano"],
+        ["a: Tenis", "b: Squash", "c: Bádminton", "d: Pádel"],
+        ["a: pulsar ns 200", "b: cb190", "c: h2r", "d: nkd"],
+        ["a: nkd", "b: cb125F", "c: boxer", "d: panigale v4"],
+        ["a: 4 cambios", "b: 5 cambios", "c: 6 cambios", "d: 3 cambios"],
+        ["a: Toyota", "b: Volkswagen", "c: Ford", "d: General Motors"],
+        ["a: Deportivo", "b: Familiar", "c: Todo terreno", "d: Eléctrico"],
+        ["a: Gasolina", "b: Diésel", "c: Híbrido", "d: Eléctrico"],
+        ["a: Mercedes-Benz", "b: BMW", "c: Audi", "d: Ferrari"],
+        ["a: Automática", "b: Manual", "c: Continuamente variable", "d: Semiautomática"],
+        ["a: Airbags", "b: Frenos ABS", "c: Control de estabilidad", "d: Asistente de estacionamiento"],
+        ["a: Gasolina", "b: Diésel", "c: Gas natural", "d: Electricidad"]
+    ]
+    
+    # Lista combinada de respuestas correctas
+    respuestas_correctas = [
+        "a", "b", "a", "a", "a", "a", "b", "a", "a", "a",
+        "c", "a", "a", "b", "a", "a", "a", "b", "a", "a"
+    ]
+
+    puntaje = 0
+
+    # Seleccionar 20 preguntas de forma aleatoria sin repetición
+    preguntas_aleatorias = random.sample(range(len(preguntas)), 20)
+    
+    for i, indice in enumerate(preguntas_aleatorias):
+        # Obtener la pregunta y opciones usando el índice aleatorio
+        pregunta = preguntas[indice]
+
+        # Mostrar la pregunta
+        print(f"Pregunta {i + 1}: {pregunta}")
+        
+        # Mostrar las opciones
+        for opcion in opciones[indice]:
+            print(opcion)
+
+        # Recibir respuesta del usuario
+        respuesta_usuario = input("Tu respuesta (o escribe 'salir' para finalizar): ")
+
+        # Comprobar si el usuario quiere salir
+        if respuesta_usuario.lower() == "salir":
+            print("Has decidido salir del juego. ¡Gracias por jugar!")
+            return puntaje
+
+        # Comprobar si la respuesta es correcta
+        if respuesta_usuario.lower() == respuestas_correctas[indice]:
+            print("¡Correcto!\n")
+            puntaje += 1
+        else:
+            print(f"Incorrecto. La respuesta correcta es: {respuestas_correctas[indice]}\n")
+
+    return puntaje
+
+# Iniciar sesión con nickname
+nickname = iniciar_sesion()
+
+# Si el usuario no decidió salir, ejecutar el quiz
+if nickname:
+    puntaje_final = juego()
+
+    # Mostrar el puntaje final de 0 a 20
+    print(f"Tu puntaje final es: {puntaje_final} de 20, {nickname}")
